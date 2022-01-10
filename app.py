@@ -11,7 +11,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapmi
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, url_base_pathname=os.environ["SAAGIE_BASE_PATH"]+"/")
 
 app.layout = html.Div([
     dcc.Graph(id='graph-with-slider'),
@@ -40,7 +40,9 @@ def update_figure(selected_year):
 
     return fig
 
+print("Running First run_server")
 app.run_server(host='0.0.0.0', debug=True, port=8050)
 
 if __name__ == '__main__':
+    print("Running second run_server")
     app.run_server(host='0.0.0.0', debug=True, port=8050)
